@@ -12,10 +12,13 @@ import {
   createTheme,
   Switch,
   FormControlLabel,
+  Typography,
+  Checkbox,
 } from "@mui/material";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { ThemeProvider } from "@emotion/react";
 import { useState } from "react";
+import { StyledButton } from "./component/Button";
 
 function App() {
   const [mode, setMode] = useState("dark");
@@ -26,6 +29,8 @@ function App() {
         mode,
       },
     });
+
+  function handleSubmit() {}
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -55,35 +60,50 @@ function App() {
             <VpnKeyIcon />
           </Avatar>
 
-          {/* mudar para Typography  */}
-          <h1>Login</h1>
+          <Typography component="h1" variant="h3">
+            Login
+          </Typography>
 
           {/* Fazer o form usando o Box */}
 
-          <TextField
-            label="Email"
-            type="email"
-            fullWidth
-            margin="normal"
-            error="true"
-            helperText="Email inválido"
-          />
-          <TextField label="Senha" type="password" fullWidth margin="normal" />
+          <Box component="form" onSubmit={handleSubmit}>
+            <TextField
+              label="Email"
+              type="email"
+              fullWidth
+              margin="normal"
+              error={true}
+              helperText="Email inválido"
+            />
+            <TextField
+              label="Senha"
+              type="password"
+              fullWidth
+              margin="normal"
+            />
 
-          {/* Construir um FormControlLabel com um Remember me */}
+            <FormControlLabel control={<Checkbox />} label="Lembre de mim" />
 
-          <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Enviar
-          </Button>
+            {/* Construir um FormControlLabel com um Remember me */}
 
-          <Grid container xs={12}>
-            <Grid item xs>
-              <Link>Esqueceu a senha?</Link>
+            <StyledButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Enviar
+            </StyledButton>
+
+            <Grid container>
+              <Grid item xs>
+                <Link>Esqueceu a senha?</Link>
+              </Grid>
+              <Grid item>
+                <Link>Ainda não tem cadastro?</Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link>Ainda não tem cadastro?</Link>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>
